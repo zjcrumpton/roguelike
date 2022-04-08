@@ -1,4 +1,6 @@
 #include <ncurses.h>
+#include "Screen.hpp"
+#include "Constants.hpp"
 
 struct Position {
     int x;
@@ -9,34 +11,6 @@ struct Player {
     Position pos;
     char symbol;
 };
-
-// Initialize ncurses
-void initScreen() {
-    // init ncurses data structures and allocate memory
-    initscr();
-
-    /**
-     * Clear the internal state of the screen.
-     * Does not clear the visual screen until refresh is called.
-     */
-    clear();
-
-    // prevents user input from being echoed
-    noecho();
-
-    // disable line buffering
-    cbreak();
-
-    // enable the keypad of the user's terminal
-    keypad(stdscr, TRUE);
-
-    // make the cursor invisible
-    curs_set(0);
-}
-
-void welcomeMessage() {
-    printw("Welcome to Rogue.\nPress any key to start.\nIf you want to quit, press \"Q\" or \"q\"");
-}
 
 void process_input(char ch, Player& player) {
     if (ch == 'a') {
@@ -66,8 +40,8 @@ void game_loop(Player& player, char input) {
 }
 
 int main() {
-    initScreen();
-    welcomeMessage();
+    Screen screen;
+    screen.print(game_text::welcome);
     
     // wait until the user presses a key
     int ch = getch();
