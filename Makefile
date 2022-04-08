@@ -1,8 +1,22 @@
-build:
-	g++ main.cpp -lncurses -o main.out
+CXX       := g++
 
-start: 
-	./main.out
+BIN     := bin
+SRC     := src
+INCLUDE := include
 
-dev:
-	make build && make start
+LIBRARIES   := -lncurses
+EXECUTABLE  := main
+
+
+all: $(BIN)/$(EXECUTABLE)
+
+run: clean all
+	clear
+	./$(BIN)/$(EXECUTABLE)
+
+$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
+	$(CXX) -I$(INCLUDE) $^ -o $@ $(LIBRARIES)
+
+clean:
+	-rm $(BIN)/*
+
