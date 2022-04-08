@@ -3,3 +3,6 @@ build:
 
 start: 
 	./main.out
+
+dev:
+	make build && make start
