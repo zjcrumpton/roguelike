@@ -24,7 +24,7 @@ void process_input(char ch, Player& player) {
     }
 }
 
-void game_loop(Player& player, char input) {
+void game_loop(Screen& screen, Player& player, char input) {
 
     while(1) {
         // quit game if user presses Q
@@ -35,13 +35,14 @@ void game_loop(Player& player, char input) {
             mvaddch(player.pos.y, player.pos.x, player.symbol);
             input = getch();
             process_input(input, player);
+            screen.~Screen();
         }
     }
 }
 
 int main() {
     Screen screen;
-    screen.print(game_text::welcome);
+    screen.print(GameText::welcome);
     
     // wait until the user presses a key
     int ch = getch();
@@ -51,5 +52,5 @@ int main() {
     player.pos.x = 10;
     player.pos.y = 10;
     player.symbol = '@';
-    game_loop(player, ch);
+    game_loop(screen, player, ch);
 }

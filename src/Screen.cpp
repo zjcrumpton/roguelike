@@ -32,3 +32,11 @@ Screen::~Screen() {
 void Screen::print(const char *message) {
     printw(message);
 }
+
+int Screen::height() {
+    return this->_height;
+}
+
+int Screen::width() {
+    return this->_width;
+}

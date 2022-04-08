@@ -2,7 +2,7 @@
 #define SCREEN_H
 
 class Screen {
-    int _height, _width;
+    int _height = 100, _width = 100;
 public:
     // Initialize NCurses
     Screen();

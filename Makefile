@@ -15,7 +15,7 @@ run: clean all
 	./$(BIN)/$(EXECUTABLE)
 
 $(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) -I$(INCLUDE) $^ -o $@ $(LIBRARIES)
+	$(CXX) -std=c++11 -I$(INCLUDE) $^ -o $@ $(LIBRARIES)
 
 clean:
 	-rm $(BIN)/*
