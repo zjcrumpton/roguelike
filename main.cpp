@@ -1,8 +1,14 @@
 #include <ncurses.h>
 
-// Main character initial position and symbol
-int row = 10, col = 10;
-const char main_char = '@';
+struct Position {
+    int x;
+    int y;
+};
+
+struct Player {
+    Position pos;
+    char symbol;
+};
 
 // Initialize ncurses
 void initScreen() {
@@ -32,7 +38,19 @@ void welcomeMessage() {
     printw("Welcome to Rogue.\nPress any key to start.\nIf you want to quit, press \"Q\" or \"q\"");
 }
 
-void game_loop(char symbol, int r, int c, char input) {
+void process_input(char ch, Player& player) {
+    if (ch == 'a') {
+        player.pos.x--;
+    } else if (ch == 'd') {
+        player.pos.x++;
+    } else if (ch == 'w') {
+        player.pos.y--;
+    } else if (ch == 's') {
+        player.pos.y++;
+    }
+}
+
+void game_loop(Player& player, char input) {
 
     while(1) {
         // quit game if user presses Q
@@ -40,8 +58,9 @@ void game_loop(char symbol, int r, int c, char input) {
             endwin();
             break;
         } else {
-            mvaddch(row, col, main_char);
+            mvaddch(player.pos.y, player.pos.x, player.symbol);
             input = getch();
+            process_input(input, player);
         }
     }
 }
@@ -54,5 +73,9 @@ int main() {
     int ch = getch();
     clear();
 
-    game_loop(main_char, row, col, ch);
+    Player player;
+    player.pos.x = 10;
+    player.pos.y = 10;
+    player.symbol = '@';
+    game_loop(player, ch);
 }
