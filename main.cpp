@@ -32,24 +32,27 @@ void welcomeMessage() {
     printw("Welcome to Rogue.\nPress any key to start.\nIf you want to quit, press \"Q\" or \"q\"");
 }
 
+void game_loop(char symbol, int r, int c, char input) {
+
+    while(1) {
+        // quit game if user presses Q
+        if (input == 'q' || input == 'Q') {
+            endwin();
+            break;
+        } else {
+            mvaddch(row, col, main_char);
+            input = getch();
+        }
+    }
+}
+
 int main() {
     initScreen();
     welcomeMessage();
     
     // wait until the user presses a key
     int ch = getch();
-
     clear();
 
-    // main game loop
-    while(1) {
-        // quit game if user presses Q
-        if (ch == 'q' || ch == 'Q') {
-            endwin();
-            break;
-        } else {
-            mvaddch(row, col, main_char);
-            ch = getch();
-        }
-    }
+    game_loop(main_char, row, col, ch);
 }
