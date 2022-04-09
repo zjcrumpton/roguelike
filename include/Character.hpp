@@ -3,6 +3,7 @@
 
 class Character {
   int _x, _y;
+  char _symbol;
 
 public:
   Character(char symbol, int startX, int startY);
