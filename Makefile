@@ -20,3 +20,6 @@ $(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
 clean:
 	-rm $(BIN)/*
 
+fmt:
+	- find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=file -i {} \;
+
