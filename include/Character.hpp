@@ -1,0 +1,18 @@
+#ifndef CHARACTER_H
+#define CHARACTER_H
+
+class Character {
+  int _x, _y;
+
+public:
+  Character(char symbol, int startX, int startY);
+
+  // Update the character's position
+  void setPos(int x, int y);
+
+  // Getters
+  int x();
+  int y();
+};
+
+#endif
