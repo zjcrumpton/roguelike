@@ -12,14 +12,25 @@ struct Player {
   char symbol;
 };
 
-void process_input(char ch, Player &player) {
+void process_input(char ch, Player &player, Screen &screen) {
   if (ch == 'a') {
+    move(player.pos.y, 0);
+    clrtoeol();
     player.pos.x--;
+    move(player.pos.y, player.pos.x);
   } else if (ch == 'd') {
+    move(player.pos.y, 0);
+    clrtoeol();
     player.pos.x++;
+
   } else if (ch == 'w') {
+    move(player.pos.y, 0);
+    clrtoeol();
     player.pos.y--;
+
   } else if (ch == 's') {
+    move(player.pos.y, 0);
+    clrtoeol();
     player.pos.y++;
   }
 }
@@ -34,8 +45,7 @@ void game_loop(Screen &screen, Player &player, char input) {
     } else {
       mvaddch(player.pos.y, player.pos.x, player.symbol);
       input = getch();
-      process_input(input, player);
-      screen.~Screen();
+      process_input(input, player, screen);
     }
   }
 }
